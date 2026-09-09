@@ -2,6 +2,8 @@
 
 import json
 
+from agents.text import plain_dashes
+
 SYSTEM_PROMPT = """You write short business answers for a life-sciences company.
 
 You are given what the research said and what our sales database returned.
@@ -55,6 +57,6 @@ def synthesize(question: str, rag_result: dict | None, sql_result: dict | None, 
         {"role": "user", "content": user},
     ])
 
-    answer = reply.content.strip()
+    answer = plain_dashes(reply.content.strip())
     citations = rag_result.get("citations") or []
     return answer + _sources(citations) if citations else answer

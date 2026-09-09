@@ -14,7 +14,7 @@ from typing import TypedDict
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import END, START, StateGraph
 
-from agents.rag_agent import answer_question
+from agents.rag_agent import RESEARCH_ONLY, answer_question
 from agents.sql_agent import run_sql
 from agents.supervisor import OFF_TOPIC_REPLY, classify
 from agents.synthesis_agent import synthesize
@@ -46,7 +46,10 @@ def build_graph(retriever, db, llm, checkpointer=None):
         return {"answer": OFF_TOPIC_REPLY}
 
     def rag_node(state: State) -> State:
-        result = answer_question(state["question"], retriever, llm, k=RAG_CHUNKS)
+        guidance = RESEARCH_ONLY if state["route"] == "cross" else None
+        result = answer_question(
+            state["question"], retriever, llm, k=RAG_CHUNKS, guidance=guidance
+        )
         return {
             "documents": result["documents"],
             "research_answer": result["answer"],

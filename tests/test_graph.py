@@ -2,6 +2,7 @@
 
 import pytest
 
+from agents.rag_agent import RESEARCH_ONLY
 from agents.supervisor import OFF_TOPIC_REPLY
 from database.db_manager import DBManager, build_database
 from graph import ask, build_graph
@@ -13,10 +14,12 @@ class RoutingLLM:
     def __init__(self, route):
         self.route = route
         self.seen = []
+        self.prompts = []
 
     def invoke(self, messages):
         system = messages[0]["content"]
         self.seen.append(system.split("\n", 1)[0])
+        self.prompts.append(messages)
         if "Decide what a user's question needs" in system:
             content = '{"route": "%s"}' % self.route
         elif "pull out the business entities" in system:
@@ -102,3 +105,15 @@ def test_the_same_thread_remembers_earlier_turns(db):
     state = ask(compiled, "second question", thread_id="t1")
     assert state["question"] == "second question"
     assert state["documents"]
+
+
+def test_the_cross_path_tells_the_rag_agent_to_stick_to_research(db):
+    _, llm = _run("cross", db)
+    sent = [m[1]["content"] for m in llm.prompts]
+    assert any(RESEARCH_ONLY in text for text in sent)
+
+
+def test_a_research_only_question_gets_no_such_guidance(db):
+    _, llm = _run("research", db)
+    sent = [m[1]["content"] for m in llm.prompts]
+    assert not any(RESEARCH_ONLY in text for text in sent)

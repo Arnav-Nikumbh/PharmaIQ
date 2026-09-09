@@ -36,7 +36,7 @@ Out of scope for this iteration:
 |---|---|---|
 | Location | `~/RAG Proj/pharmaiq` | User's choice; git repo initialised there. |
 | Python | 3.12 via `uv` | System Python is 3.9 (too old); 3.14 is ahead of chromadb support. |
-| LLM | Groq, `llama-3.3-70b-versatile` | User's choice; free tier, fast, supports JSON mode. |
+| LLM | Groq, `openai/gpt-oss-120b` | User's choice of provider. Llama models are not available on this account, and this is the strongest chat model it can reach. Override with `GROQ_MODEL` in `.env`. |
 | Embeddings | Local `all-MiniLM-L6-v2` | Groq offers no embeddings API. CPU-local, free, ~80MB weights fetched on first run. |
 | Internal DB | Northwind *shape*, locally seeded | Option A. No download, fully private, Northwind-style column names preserve the SQL self-correction exercise. |
 | Tool layer | Plain functions; MCP as a facade | Graph nodes call functions directly (one process, easier to debug); `server.py` re-exports them over FastMCP. |
@@ -278,8 +278,10 @@ pharmaiq/
 
 ## 10. Risks
 
-- **Groq JSON reliability.** Llama models sometimes wrap JSON in prose. Every structured
-  call uses JSON mode where available plus a tolerant parser and a defined fallback.
+- **Groq JSON reliability.** Models sometimes wrap JSON in prose, so every structured
+  call goes through a tolerant parser with a defined fallback.
+- **Prompt instructions are not guarantees.** The model ignored "do not use em dashes"
+  in live testing, so `agents/text.py` strips them from every answer in code.
 - **Entity-to-schema mismatch.** The extractor may name therapies absent from the seeded
   catalogue. Mitigated by matching against real column values and by seeding the catalogue
   with therapy classes that match the demo topics (GLP-1, obesity, diabetes, oncology).

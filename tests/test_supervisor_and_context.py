@@ -148,3 +148,8 @@ def test_synthesis_reports_a_failed_query_honestly():
     llm = StubLLM("Final answer")
     synthesize("q", RAG, failed, llm)
     assert "no such column" in str(llm.prompts[0])
+
+
+def test_synthesis_strips_em_dashes_from_the_final_answer():
+    result = synthesize("q", RAG, SQL, StubLLM("North — the leader"))
+    assert "—" not in result

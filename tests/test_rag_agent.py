@@ -119,3 +119,22 @@ def test_live_groq_call_produces_a_grounded_answer():
     result = answer_question("what helps weight loss?", StubRetriever(CHUNKS), get_llm())
     assert result["answer"]
     assert "[1]" in result["answer"] or "[2]" in result["answer"]
+
+
+def test_guidance_leads_and_the_question_follows_it():
+    llm = StubLLM()
+    answer_question("q", StubRetriever(CHUNKS), llm, guidance="only the research part")
+    sent = llm.prompts[0][1]["content"]
+    assert sent.startswith("only the research part")
+    assert sent.endswith("q")
+
+
+def test_no_guidance_means_the_question_is_sent_alone():
+    llm = StubLLM()
+    answer_question("just this", StubRetriever(CHUNKS), llm)
+    assert llm.prompts[0][1]["content"] == "just this"
+
+
+def test_em_dashes_are_stripped_from_the_answer():
+    result = answer_question("q", StubRetriever(CHUNKS), StubLLM("Weight loss — it works [1]."))
+    assert "—" not in result["answer"]

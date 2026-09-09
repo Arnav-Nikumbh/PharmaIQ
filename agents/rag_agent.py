@@ -7,6 +7,17 @@ domain where a confident wrong answer is worse than no answer.
 
 import re
 
+from agents.text import plain_dashes
+
+# On the cross-source path the user's question also asks about internal sales
+# data, which this agent cannot see. Without this it answers "the sources do
+# not cover product performance", which is true but useless.
+RESEARCH_ONLY = (
+    "Ignore any part of the question about our own sales, products, territories "
+    "or performance. Another system answers that. Summarise only what the "
+    "research says about the treatments and conditions involved."
+)
+
 NO_EVIDENCE = (
     "I could not find anything in the research library about that. "
     "Try ingesting research on that topic first."
@@ -58,6 +69,7 @@ def answer_question(
     llm,
     k: int = 6,
     filters: dict | None = None,
+    guidance: str | None = None,
 ) -> dict:
     """Retrieve, answer from what was retrieved, and return the citations used."""
     chunks = retriever.search(question, k=k, filters=filters)
@@ -65,11 +77,14 @@ def answer_question(
         return {"answer": NO_EVIDENCE, "citations": [], "documents": []}
 
     context, citations = build_context(chunks)
+    # The guidance leads and the question follows. Appending it instead leaves
+    # the model anchored on the sales half of a cross-source question.
+    user = f"{guidance}\n\nThe user asked: {question}" if guidance else question
     reply = llm.invoke([
         {"role": "system", "content": SYSTEM_PROMPT.format(context=context)},
-        {"role": "user", "content": question},
+        {"role": "user", "content": user},
     ])
-    answer = reply.content.strip()
+    answer = plain_dashes(reply.content.strip())
 
     # Show only the sources the answer actually leant on. If it cited nothing,
     # keep them all rather than stripping the evidence away entirely.
