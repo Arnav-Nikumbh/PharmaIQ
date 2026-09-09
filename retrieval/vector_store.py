@@ -21,6 +21,9 @@ import config
 COLLECTION = "research"
 RRF_K = 60
 CANDIDATES = 30
+# Several chunks of one long paper can crowd out every other document, which
+# narrows the evidence the agent gets to see.
+MAX_PER_DOCUMENT = 2
 _TOKEN = re.compile(r"[a-z0-9\-]+")
 
 
@@ -36,6 +39,36 @@ def reciprocal_rank_fusion(rankings: list[list[str]], k: int = RRF_K) -> list[st
         for rank, item in enumerate(ranking):
             scores[item] = scores.get(item, 0.0) + 1.0 / (k + rank + 1)
     return sorted(scores, key=scores.get, reverse=True)
+
+
+def document_of(chunk_id: str) -> str:
+    """Read the document id out of a chunk id shaped source:document:index."""
+    parts = chunk_id.split(":")
+    return parts[1] if len(parts) >= 3 else chunk_id
+
+
+def diversify(chunk_ids: list[str], limit: int, max_per_document: int) -> list[str]:
+    """Take the top `limit` ids, allowing only so many chunks per document.
+
+    Ids skipped by the cap are used to backfill, so a corpus with few distinct
+    documents still returns a full result set rather than a short one.
+    """
+    if max_per_document <= 0:
+        return chunk_ids[:limit]
+
+    kept: list[str] = []
+    overflow: list[str] = []
+    seen: dict[str, int] = {}
+    for chunk_id in chunk_ids:
+        document = document_of(chunk_id)
+        if seen.get(document, 0) < max_per_document:
+            seen[document] = seen.get(document, 0) + 1
+            kept.append(chunk_id)
+        else:
+            overflow.append(chunk_id)
+        if len(kept) == limit:
+            return kept
+    return (kept + overflow)[:limit]
 
 
 def _default_embedding_fn():
@@ -102,7 +135,13 @@ class HybridRetriever:
         )
         return result["ids"][0] if result["ids"] else []
 
-    def search(self, query: str, k: int = 10, filters: dict | None = None) -> list[dict]:
+    def search(
+        self,
+        query: str,
+        k: int = 10,
+        filters: dict | None = None,
+        max_per_document: int = MAX_PER_DOCUMENT,
+    ) -> list[dict]:
         """Return the top k chunks for `query`, optionally filtered by metadata."""
         if self.count() == 0:
             return []
@@ -118,7 +157,8 @@ class HybridRetriever:
             allowed = set(self.collection.get(where=where)["ids"])
             keyword = [chunk_id for chunk_id in keyword if chunk_id in allowed]
 
-        ordered = reciprocal_rank_fusion([dense, keyword])[:k]
+        fused = reciprocal_rank_fusion([dense, keyword])
+        ordered = diversify(fused, k, max_per_document)
         if not ordered:
             return []
 

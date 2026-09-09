@@ -6,7 +6,12 @@ import numpy as np
 import pytest
 from chromadb.api.types import EmbeddingFunction
 
-from retrieval.vector_store import HybridRetriever, reciprocal_rank_fusion
+from retrieval.vector_store import (
+    HybridRetriever,
+    diversify,
+    document_of,
+    reciprocal_rank_fusion,
+)
 
 
 class FakeEmbedding(EmbeddingFunction):
@@ -127,3 +132,60 @@ def test_the_store_reopens_from_disk(tmp_path):
     second = HybridRetriever(persist_dir=tmp_path / "chroma", embedding_fn=FakeEmbedding())
     assert second.count() == len(CHUNKS)
     assert second.search("semaglutide", k=1)[0]["metadata"]["document_id"] == "1"
+
+
+# --- chunk diversity -------------------------------------------------------
+
+def test_diversify_caps_chunks_from_one_document():
+    ids = ["pubmed:1:0", "pubmed:1:1", "pubmed:1:2", "pubmed:2:0"]
+    assert diversify(ids, 4, 2) == ["pubmed:1:0", "pubmed:1:1", "pubmed:2:0", "pubmed:1:2"]
+
+
+def test_diversify_keeps_the_best_chunks_of_each_document_first():
+    ids = ["pubmed:1:0", "pubmed:1:1", "pubmed:2:0", "pubmed:3:0"]
+    assert diversify(ids, 3, 1) == ["pubmed:1:0", "pubmed:2:0", "pubmed:3:0"]
+
+
+def test_diversify_backfills_rather_than_returning_too_few():
+    # Only one document exists, so the cap cannot be honoured and a short
+    # result would be worse than a repetitive one.
+    ids = ["pubmed:1:0", "pubmed:1:1", "pubmed:1:2"]
+    assert diversify(ids, 3, 1) == ids
+
+
+def test_diversify_preserves_ranking_order_within_the_cap():
+    ids = ["pubmed:9:0", "pubmed:8:0", "pubmed:7:0"]
+    assert diversify(ids, 3, 2) == ids
+
+
+def test_diversify_respects_the_limit():
+    ids = [f"pubmed:{i}:0" for i in range(10)]
+    assert len(diversify(ids, 4, 2)) == 4
+
+
+def test_a_cap_of_zero_disables_the_rule():
+    ids = ["pubmed:1:0", "pubmed:1:1"]
+    assert diversify(ids, 2, 0) == ids
+
+
+def test_document_of_reads_the_middle_segment():
+    assert document_of("clinicaltrials:NCT123:4") == "NCT123"
+
+
+def test_document_of_tolerates_an_odd_id():
+    assert document_of("weird-id") == "weird-id"
+
+
+def test_search_does_not_return_more_than_two_chunks_of_one_document(tmp_path):
+    store = HybridRetriever(persist_dir=tmp_path / "div", embedding_fn=FakeEmbedding())
+    store.add_chunks([
+        _chunk("pubmed:1:0", "weight loss outcomes in obesity trial part one"),
+        _chunk("pubmed:1:1", "weight loss outcomes in obesity trial part two"),
+        _chunk("pubmed:1:2", "weight loss outcomes in obesity trial part three"),
+        _chunk("pubmed:2:0", "weight loss outcomes in a second obesity trial"),
+    ])
+    results = store.search("weight loss outcomes obesity", k=3)
+    from collections import Counter
+    counts = Counter(r["chunk_id"].split(":")[1] for r in results)
+    assert counts["1"] <= 2
+    assert "2" in counts
