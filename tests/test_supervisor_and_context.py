@@ -153,3 +153,11 @@ def test_synthesis_reports_a_failed_query_honestly():
 def test_synthesis_strips_em_dashes_from_the_final_answer():
     result = synthesize("q", RAG, SQL, StubLLM("North — the leader"))
     assert "—" not in result
+
+
+def test_synthesis_forbids_unsupported_claims():
+    llm = StubLLM("Final answer")
+    synthesize("q", RAG, SQL, llm)
+    rules = llm.prompts[0][0]["content"]
+    assert "Every statement must be supported by the research or the data" in rules
+    assert "not for speculation" in rules

@@ -16,6 +16,12 @@ What this suggests
 Rules:
 - Keep the research citation numbers, like [1], exactly as they appear.
 - Quote real figures from the data. Never invent one.
+- Every statement must be supported by the research or the data you were given.
+  Do not add background knowledge, market commentary, or an explanation of why
+  a pattern exists unless the material says so.
+- "What this suggests" is for what follows from the numbers and the research,
+  not for speculation. Where a pattern has no explanation in the material, say
+  that the reason is not visible in this data.
 - If the database query failed, say the numbers were not available and answer
   from the research alone.
 - Write plainly. Explain any technical term the first time you use it.
