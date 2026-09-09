@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "pharmaiq",
+      "runtimeExecutable": "uv",
+      "runtimeArgs": ["run", "streamlit", "run", "app.py", "--server.headless", "true", "--server.port", "8599"],
+      "port": 8599
+    }
+  ]
+}

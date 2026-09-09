@@ -1,0 +1,92 @@
+# PharmaIQ
+
+An assistant that answers questions using published medical research, an
+internal sales database, or both together.
+
+A normal document assistant can tell you what the research says. A normal
+database assistant can tell you what sold. PharmaIQ connects the two: it reads
+the research first, pulls out the treatments and therapy areas it mentions,
+checks those names against the product catalogue, and only then queries the
+sales data. What the research turns up decides what gets looked up.
+
+## Learning project
+
+This is a demo built for learning. Everything in it is self-contained:
+
+- The sales database is generated locally and is entirely made up. No real
+  business data is used anywhere.
+- The only secret is a personal Groq key, kept in a local `.env` file.
+- Research comes from two free public APIs that need no key.
+
+## Setup
+
+```bash
+uv sync
+cp .env.example .env      # then paste your Groq key into .env
+uv run python -m database.build
+uv run python -m ingestion.ingest --topic "obesity weight loss treatment" --limit 25
+uv run streamlit run app.py
+```
+
+Get a free key at console.groq.com. The first ingest downloads a small
+embedding model (about 80MB), once.
+
+## How a question is answered
+
+```
+                    supervisor
+                        |
+    +---------+---------+---------+
+    |         |         |         |
+ off topic  research   data    both
+    |         |         |         |
+    |        RAG        |        RAG
+    |         |         |         |
+    |         |         |     extract what
+    |         |         |     the research
+    |         |         |     names
+    |         |         |         |
+    |         |        SQL <-- SQL, filtered
+    |         |         |     by those names
+    |         +----+----+---------+
+    |              |
+   reply       synthesis
+```
+
+The supervisor picks the path. Off-topic questions are turned away before any
+work happens.
+
+## Pieces
+
+| Path | What it does |
+|---|---|
+| `database/` | The sales database: schema, generated data, read-only access |
+| `database/sql_guard.py` | Rejects anything that is not a single read query |
+| `ingestion/` | Fetching from ClinicalTrials.gov and PubMed, cleaning, chunking |
+| `retrieval/vector_store.py` | Meaning search and keyword search, merged |
+| `agents/` | Routing, research answers, query writing, final write-up |
+| `context_extractor.py` | The bridge from research to database query |
+| `graph.py` | The workflow, with conversation memory |
+| `tools/tools.py` | The three data operations |
+| `server.py` | The same three, exposed over MCP |
+| `app.py` | The web interface |
+
+## Two things worth knowing
+
+**Queries cannot change anything.** Generated SQL passes a validator that
+allows only single SELECT statements, and it runs over a connection opened
+read-only. Either one alone would stop a destructive query. Both are in place.
+
+**Wrong queries fix themselves.** The database column names are capitalised in
+a way models tend to guess wrong. When a query fails, the database's own error
+message goes back to the model, which corrects it. Up to three attempts.
+
+## Tests
+
+```bash
+uv run pytest          # fast, offline, no key needed
+uv run pytest -m llm   # the few tests that call Groq for real
+```
+
+Everything except the `llm` tests runs without a network connection. Fetchers
+are tested against recorded API responses, and the agents against stub models.
