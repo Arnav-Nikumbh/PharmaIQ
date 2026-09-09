@@ -13,8 +13,9 @@ The distinguishing behaviour is Path C: research retrieved from unstructured doc
 determines *what internal data gets queried*. Retrieval influences the SQL, rather than
 RAG and SQL being two independent features in one app.
 
-This is a demo/learning project. It uses no Aeron credentials, no Aeron databases, and
-no Infisical. Its one secret lives in a local, gitignored `.env`.
+This is a demo/learning project. It is entirely self-contained: no employer
+credentials, systems or data are involved. Its one secret, a personal Groq key,
+lives in a local, gitignored `.env`.
 
 ## 2. Scope
 
