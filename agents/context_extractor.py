@@ -16,12 +16,18 @@ Reply with JSON only, in this shape:
   "entities": {
     "therapy": [],       // named treatments or drugs
     "condition": [],     // diseases or indications
-    "product_class": [], // the therapy area, in plain words, such as
-                         // "Weight Management" or "Heart Health"
+    "product_class": [], // therapy areas, copied word for word from the list below
     "regions": []        // places, only if the extracts name any
   },
   "insights": []         // short plain statements of what the research found
 }
+
+The only therapy areas that exist in our catalogue are:
+__CATEGORIES__
+
+For product_class, copy names from that list exactly. Do not invent a name that
+is not on it, and do not reword one. Include an area only if the user's question
+is actually about it. If none of them fit, leave product_class empty.
 
 Use only what the extracts say. Leave a list empty rather than guessing."""
 
@@ -42,22 +48,33 @@ def _catalogue(db) -> tuple[dict, dict]:
     return categories, products
 
 
-def extract_context(chunks: list[dict], llm, db) -> dict:
-    """Turn retrieved chunks into entities checked against the database."""
+def extract_context(chunks: list[dict], llm, db, question: str = "") -> dict:
+    """Turn retrieved chunks into entities checked against the database.
+
+    The catalogue's own therapy area names go into the prompt. Left to invent
+    them the model produces near misses like "Diabetes Management" for
+    "Diabetes Care", which then fail to match and are dropped, letting an
+    incidental area drive the query instead.
+    """
     if not chunks:
         return {**EMPTY, "matched": {"categories": [], "products": []}}
 
+    categories, products = _catalogue(db)
+    # A plain replace, not .format: the prompt contains JSON braces.
+    system = SYSTEM_PROMPT.replace(
+        "__CATEGORIES__", "\n".join(f"- {name}" for name in sorted(categories.values()))
+    )
     extracts = "\n\n".join(c.get("text", "") for c in chunks)
+    user = f"The user asked: {question}\n\n{extracts}" if question else extracts
     reply = llm.invoke([
-        {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user", "content": extracts},
+        {"role": "system", "content": system},
+        {"role": "user", "content": user},
     ])
     parsed = parse_json_object(reply.content)
     if not parsed:
         return {**EMPTY, "matched": {"categories": [], "products": []}}
 
     entities = parsed.get("entities") or {}
-    categories, products = _catalogue(db)
 
     matched_categories: list[str] = []
     matched_products: list[str] = []

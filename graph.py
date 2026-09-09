@@ -57,7 +57,9 @@ def build_graph(retriever, db, llm, checkpointer=None):
         }
 
     def context_node(state: State) -> State:
-        return {"research_context": extract_context(state.get("documents", []), llm, db)}
+        return {"research_context": extract_context(
+            state.get("documents", []), llm, db, question=state["question"]
+        )}
 
     def sql_node(state: State) -> State:
         result = run_sql(

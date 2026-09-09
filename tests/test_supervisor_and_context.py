@@ -161,3 +161,23 @@ def test_synthesis_forbids_unsupported_claims():
     rules = llm.prompts[0][0]["content"]
     assert "Every statement must be supported by the research or the data" in rules
     assert "not for speculation" in rules
+
+
+def test_the_real_category_names_are_given_to_the_model(db):
+    llm = StubLLM(EXTRACTED)
+    extract_context(CHUNKS, llm, db)
+    rules = llm.prompts[0][0]["content"]
+    assert "- Diabetes Care" in rules
+    assert "- Heart Health" in rules
+    assert "do not reword one" in rules
+
+
+def test_the_question_is_given_to_the_model_when_supplied(db):
+    llm = StubLLM(EXTRACTED)
+    extract_context(CHUNKS, llm, db, question="how are diabetes products selling?")
+    assert "how are diabetes products selling?" in llm.prompts[0][1]["content"]
+
+
+def test_extraction_works_without_a_question(db):
+    context = extract_context(CHUNKS, StubLLM(EXTRACTED), db)
+    assert context["matched"]["categories"] == ["Weight Management"]
