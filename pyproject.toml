@@ -1,0 +1,23 @@
+[project]
+name = "pharmaiq"
+version = "0.1.0"
+description = "Agentic commercial intelligence assistant for the life-sciences domain"
+requires-python = ">=3.12"
+dependencies = [
+    "python-dotenv>=1.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "llm: requires a live Groq API key and network access",
+]
+addopts = "-m 'not llm'"
+
+[tool.uv]
+package = false
