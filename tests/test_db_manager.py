@@ -61,3 +61,22 @@ def test_a_realistic_analytics_query_runs(db):
     """)
     assert len(rows) == 4
     assert rows[0]["TotalSales"] > 0
+
+
+def test_the_read_only_uri_is_properly_escaped(tmp_path):
+    """A path with a space must still open. Windows paths need this too."""
+    folder = tmp_path / "a folder with spaces"
+    folder.mkdir()
+    path = folder / "spaced.db"
+    build_database(path)
+    db = DBManager(path)
+    assert db.execute_select("SELECT COUNT(*) AS n FROM Products")[0]["n"] == 60
+
+
+def test_the_connection_uri_has_no_raw_separator_problems(tmp_path):
+    path = tmp_path / "uri check" / "u.db"
+    build_database(path)
+    uri = f"{DBManager(path).path.resolve().as_uri()}?mode=ro"
+    assert uri.startswith("file:///")
+    assert " " not in uri
+    assert "\\" not in uri

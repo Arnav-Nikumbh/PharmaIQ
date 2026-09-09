@@ -20,6 +20,9 @@ This is a demo built for learning. Everything in it is self-contained:
 
 ## Setup
 
+On Windows, follow [WINDOWS_SETUP.md](WINDOWS_SETUP.md) instead, which covers
+every step from installing the tools to testing in the browser.
+
 ```bash
 uv sync
 cp .env.example .env      # then paste your Groq key into .env

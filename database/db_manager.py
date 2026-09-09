@@ -33,7 +33,10 @@ class DBManager:
             )
 
     def _connect(self) -> sqlite3.Connection:
-        conn = sqlite3.connect(f"file:{self.path}?mode=ro", uri=True)
+        # as_uri() rather than an f-string: it escapes spaces and turns Windows
+        # backslashes into a valid file URI. Interpolating the raw path produces
+        # something sqlite cannot open on Windows.
+        conn = sqlite3.connect(f"{self.path.resolve().as_uri()}?mode=ro", uri=True)
         conn.row_factory = sqlite3.Row
         return conn
 
