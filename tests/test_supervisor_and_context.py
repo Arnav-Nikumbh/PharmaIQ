@@ -181,3 +181,39 @@ def test_the_question_is_given_to_the_model_when_supplied(db):
 def test_extraction_works_without_a_question(db):
     context = extract_context(CHUNKS, StubLLM(EXTRACTED), db)
     assert context["matched"]["categories"] == ["Weight Management"]
+
+
+def test_synthesis_states_the_true_row_count():
+    many = {"sql": "SELECT 1", "error": None,
+            "results": [{"ProductID": i} for i in range(60)]}
+    llm = StubLLM("Final answer")
+    synthesize("q", RAG, many, llm)
+    sent = llm.prompts[0][1]["content"]
+    assert "returned 60 rows" in sent
+    assert "Only the first 30 are shown" in sent
+
+
+def test_synthesis_does_not_claim_truncation_when_there_is_none():
+    few = {"sql": "SELECT 1", "error": None, "results": [{"ProductID": 1}]}
+    llm = StubLLM("Final answer")
+    synthesize("q", RAG, few, llm)
+    sent = llm.prompts[0][1]["content"]
+    assert "returned 1 rows" in sent
+    assert "Only the first" not in sent
+
+
+def test_synthesis_sends_at_most_thirty_rows():
+    many = {"sql": "SELECT 1", "error": None,
+            "results": [{"ProductID": i} for i in range(60)]}
+    llm = StubLLM("Final answer")
+    synthesize("q", RAG, many, llm)
+    sent = llm.prompts[0][1]["content"]
+    assert '"ProductID": 29' in sent
+    assert '"ProductID": 30' not in sent
+
+
+def test_synthesis_is_told_to_disclose_sampling():
+    llm = StubLLM("Final answer")
+    synthesize("q", RAG, SQL, llm)
+    rules = llm.prompts[0][0]["content"]
+    assert "say how many rows there are in total" in rules

@@ -4,6 +4,11 @@ import json
 
 from agents.text import plain_dashes
 
+# Only this many rows go into the prompt. The count is stated alongside them,
+# because a model shown 30 of 60 rows will otherwise report "30 records" as a
+# fact about the database.
+PROMPT_ROWS = 30
+
 SYSTEM_PROMPT = """You write short business answers for a life-sciences company.
 
 You are given what the research said and what our sales database returned.
@@ -15,7 +20,12 @@ What this suggests
 
 Rules:
 - Keep the research citation numbers, like [1], exactly as they appear.
-- Quote real figures from the data. Never invent one.
+- Quote real figures from the data. Never invent one. Round money to two
+  decimal places.
+- The rows you are shown may be a sample of a larger result. Never state a
+  total or a count that is not given to you explicitly. When you were shown a
+  sample, say how many rows there are in total and that you are listing only
+  some of them.
 - Every statement must be supported by the research or the data you were given.
   Do not add background knowledge, market commentary, or an explanation of why
   a pattern exists unless the material says so.
@@ -36,7 +46,15 @@ def _sql_block(sql_result: dict | None) -> str:
     rows = sql_result.get("results") or []
     if not rows:
         return "The database query returned no rows."
-    return json.dumps(rows[:30], indent=2, default=str)
+
+    shown = rows[:PROMPT_ROWS]
+    header = f"The query returned {len(rows)} rows."
+    if len(rows) > len(shown):
+        header += (
+            f" Only the first {len(shown)} are shown below. Do not describe the"
+            " number of rows shown as though it were the total."
+        )
+    return f"{header}\n{json.dumps(shown, indent=2, default=str)}"
 
 
 def _sources(citations: list[dict]) -> str:

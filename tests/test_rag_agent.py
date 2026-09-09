@@ -108,9 +108,14 @@ def test_unused_citations_are_dropped_from_the_answer():
     assert [c["number"] for c in result["citations"]] == [1]
 
 
-def test_a_model_that_cites_nothing_keeps_every_source():
-    result = answer_question("q", StubRetriever(CHUNKS), StubLLM("No citations here."))
-    assert len(result["citations"]) == 2
+def test_an_answer_that_cites_nothing_lists_no_sources():
+    # Listing sources under "I found nothing relevant" implies support that
+    # the answer never claimed.
+    result = answer_question(
+        "q", StubRetriever(CHUNKS), StubLLM("The sources do not cover that.")
+    )
+    assert result["citations"] == []
+    assert result["documents"] == CHUNKS
 
 
 @pytest.mark.llm

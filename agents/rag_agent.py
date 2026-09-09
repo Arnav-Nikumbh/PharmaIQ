@@ -86,10 +86,13 @@ def answer_question(
     ])
     answer = plain_dashes(reply.content.strip())
 
-    # Show only the sources the answer actually leant on. If it cited nothing,
-    # keep them all rather than stripping the evidence away entirely.
+    # Show only the sources the answer actually cited. An uncited answer is not
+    # grounded in any particular source, and listing them anyway implies
+    # support it never claimed. This matters most when retrieval returns
+    # loosely related documents and the answer correctly says nothing relevant
+    # was found. Everything retrieved is still returned in "documents" for the
+    # interface to show.
     used = {int(n) for n in _CITED.findall(answer)}
-    if used:
-        citations = [c for c in citations if c["number"] in used]
+    citations = [c for c in citations if c["number"] in used]
 
     return {"answer": answer, "citations": citations, "documents": chunks}
