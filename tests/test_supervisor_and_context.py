@@ -5,7 +5,7 @@ import pytest
 from agents.parsing import parse_json_object
 from agents.supervisor import ROUTES, classify
 from agents.synthesis_agent import synthesize
-from context_extractor import extract_context
+from agents.context_extractor import extract_context
 from database.db_manager import DBManager, build_database
 
 

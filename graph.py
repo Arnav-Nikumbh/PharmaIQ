@@ -18,7 +18,7 @@ from agents.rag_agent import answer_question
 from agents.sql_agent import run_sql
 from agents.supervisor import OFF_TOPIC_REPLY, classify
 from agents.synthesis_agent import synthesize
-from context_extractor import extract_context
+from agents.context_extractor import extract_context
 
 RAG_CHUNKS = 6
 

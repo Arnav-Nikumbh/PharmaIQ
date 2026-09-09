@@ -86,7 +86,7 @@ Streamlit (app.py)
    agents/*.py                    tools/tools.py
         |                         /            \
         v                        v              v
- context_extractor.py    HybridRetriever    DBManager
+ agents/context_extractor  HybridRetriever  DBManager
                                 |               |
                                 v               v
                            ChromaDB         SQLite
@@ -172,7 +172,7 @@ of them import Streamlit or LangGraph internals, so all are testable directly.
 - **`synthesis_agent.py`** — composes the final answer in the three-part shape from README
   Section 14 (Research Findings / Internal Performance / Business Insight / Sources), and
   omits sections it has no data for.
-- **`context_extractor.py`** — the RAG-to-SQL bridge. Turns retrieved chunks into a
+- **`agents/context_extractor.py`** — the RAG-to-SQL bridge. Turns retrieved chunks into a
   structured object:
 
   ```json
@@ -256,14 +256,13 @@ Nine phases, following the README. Review checkpoint after each.
 
 ```
 pharmaiq/
-├── agents/{supervisor,rag_agent,sql_agent,synthesis_agent}.py
+├── agents/{supervisor,rag_agent,sql_agent,synthesis_agent,context_extractor,llm,parsing}.py
 ├── ingestion/{clinicaltrials,pubmed,processor,ingest}.py
 ├── retrieval/vector_store.py
 ├── tools/tools.py
 ├── database/{db_manager,schema}.py
 ├── graph.py
 ├── server.py
-├── context_extractor.py
 ├── app.py
 ├── config.py
 ├── data/            # sqlite db + cached raw API responses (gitignored)

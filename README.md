@@ -65,7 +65,7 @@ work happens.
 | `ingestion/` | Fetching from ClinicalTrials.gov and PubMed, cleaning, chunking |
 | `retrieval/vector_store.py` | Meaning search and keyword search, merged |
 | `agents/` | Routing, research answers, query writing, final write-up |
-| `context_extractor.py` | The bridge from research to database query |
+| `agents/context_extractor.py` | The bridge from research to database query |
 | `graph.py` | The workflow, with conversation memory |
 | `tools/tools.py` | The three data operations |
 | `server.py` | The same three, exposed over MCP |
