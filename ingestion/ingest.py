@@ -15,6 +15,7 @@ import config
 from ingestion.clinicaltrials import fetch_studies
 from ingestion.processor import process_documents
 from ingestion.pubmed import fetch_articles
+from retrieval.vector_store import HybridRetriever
 
 FETCHERS = {"clinicaltrials": fetch_studies, "pubmed": fetch_articles}
 
@@ -52,6 +53,9 @@ def main() -> None:
         "--source", choices=[*FETCHERS, "both"], default="both", help="which source to use"
     )
     parser.add_argument("--refresh", action="store_true", help="ignore the cache")
+    parser.add_argument(
+        "--no-index", action="store_true", help="chunk only, do not add to the search index"
+    )
     args = parser.parse_args()
 
     sources = list(FETCHERS) if args.source == "both" else [args.source]
@@ -67,6 +71,12 @@ def main() -> None:
         print(f"\n{len(documents)} documents produced {len(chunks)} chunks")
         print(f"chunk size: min {min(sizes)}, average {sum(sizes) // len(sizes)}, max {max(sizes)}")
         print(f"saved to {out}")
+
+        if not args.no_index:
+            print("\nIndexing (the embedding model downloads once on first run)...")
+            store = HybridRetriever()
+            store.add_chunks(chunks)
+            print(f"search index now holds {store.count()} chunks")
     else:
         print("\nNo documents found for that topic.")
 
