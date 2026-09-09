@@ -1,0 +1,560 @@
+{
+  "studies": [
+    {
+      "protocolSection": {
+        "identificationModule": {
+          "nctId": "NCT03788915",
+          "orgStudyIdInfo": {
+            "id": "LIVA USouthernDenmark"
+          },
+          "organization": {
+            "fullName": "University of Southern Denmark",
+            "class": "OTHER"
+          },
+          "briefTitle": "Weight Loss and Reversing T2D Through eHealth Coaching",
+          "officialTitle": "Facilitating Weight Loss and Reversing Type 2 Diabetes (T2D) by Means of a Collaborative eHealth Lifestyle Coaching Intervention in Primary Care - A 2-year Randomised Controlled Trial",
+          "acronym": "LIVA"
+        },
+        "statusModule": {
+          "statusVerifiedDate": "2018-12",
+          "overallStatus": "UNKNOWN",
+          "lastKnownStatus": "RECRUITING",
+          "expandedAccessInfo": {
+            "hasExpandedAccess": false
+          },
+          "startDateStruct": {
+            "date": "2018-04-16",
+            "type": "ACTUAL"
+          },
+          "primaryCompletionDateStruct": {
+            "date": "2019-04",
+            "type": "ESTIMATED"
+          },
+          "completionDateStruct": {
+            "date": "2021-03",
+            "type": "ESTIMATED"
+          },
+          "studyFirstSubmitDate": "2015-06-16",
+          "studyFirstSubmitQcDate": "2018-12-24",
+          "studyFirstPostDateStruct": {
+            "date": "2018-12-28",
+            "type": "ACTUAL"
+          },
+          "lastUpdateSubmitDate": "2018-12-24",
+          "lastUpdatePostDateStruct": {
+            "date": "2018-12-28",
+            "type": "ACTUAL"
+          }
+        },
+        "sponsorCollaboratorsModule": {
+          "responsibleParty": {
+            "type": "PRINCIPAL_INVESTIGATOR",
+            "investigatorFullName": "Carl J. Brandt",
+            "investigatorTitle": "MD, PhD, Principal investigator",
+            "investigatorAffiliation": "University of Southern Denmark"
+          },
+          "leadSponsor": {
+            "name": "University of Southern Denmark",
+            "class": "OTHER"
+          },
+          "collaborators": [
+            {
+              "name": "Odense University Hospital",
+              "class": "OTHER"
+            }
+          ]
+        },
+        "oversightModule": {
+          "oversightHasDmc": false,
+          "isFdaRegulatedDrug": false,
+          "isFdaRegulatedDevice": false
+        },
+        "descriptionModule": {
+          "briefSummary": "Background: Systematic reviews conclude that Internet and mobile interventions can significantly change lifestyle in a short time span. The applicant has developed a collaborative eHealth tool (LIVA) that has led to a significant and clinically relevant weight loss of 5.4 to 7.0 kg over 12 to 20 months in primary care settings. The objective of this study is to develop and evaluate a model targeting long-term effects using eHealth coaching assisted by machine learning-generated advice intervention for overweight patients at risk of developing diabetes as well as current type 2 diabetes (T2D) patients in a primary care setting.\n\nMethods and analysis: Randomized controlled trial with 1-year intervention and 1-year maintenance. The primary outcome is weight loss and the secondary outcome is reduced HbA1c level. The study will comprise 340 overweight patients of which 170 will have T2D. Individual data will be obtained from clinical measurements, questionnaire data, registered from the collaborative eHealth tool, as well as other registry data at baseline and at 6, 12 and 24 months. The core of the intervention is the establishment of an empathic relationship and ongoing real-life coaching using the LIVA app (working together with native iOS and Android) and Internet for patients combined with an effective coaching module supported by machine learning methods. The intervention will be compared with usual care.",
+          "detailedDescription": "1. Introduction With diseases such as Type 2 diabetes (T2D), adiposity and cardiovascular diseases rapidly increasing, cost effective management is needed (World Health Organization, 2017). Lifestyle improvements such as weight loss, diet and exercise managed in a primary care setting has shown significant impact on reduced risk of cardiovascular disease and reversing T2D for 46-56% of patients with T2D (Lean et al., 2017, Johansen et al., 2017). Based on these findings, weight loss among overweight patients with T2D and patients at risk of developing T2D has important clinical and societal effects.\n\n   Traditional lifestyle interventions are mostly ineffective and expensive long-term. Internet and mobile technology-based interventions aiming at promoting healthy lifestyles have shown potential for scalability, accessibility, and cost effective use in primary care settings both for overweight patients and T2D patients (Brandt et al, 2011, Haste et al., 2017, Komkova et al 2018). However, there is only sparse knowledge about whether the beneficial effects are long-term (Afshin et al., 2016, Levine et al., 2015).\n\n   Qualitative research studies comprising patients, general practitioners and the healthcare professionals' perspectives suggest that the establishment of an empathic relationship is key to long-term lifestyle change (Brandt et al., 2018a, 2018b and 2018c). An observational study among 103 diabetes patients using the collaborative eHealth tool (LIVA) demonstrated a clinically significant self-reported weight loss of 4.7 kg among users who had been on the platform for 90+ days (Komkova et al., 2018). Modelling the association between weight reduction and decreased health care costs, the same study estimated that the program will save 2,667\u20ac annually for every patient and be cost effective from a municipal perspective even with only 1 year of implementation data for T2D patients (Mukherjee et al., 2016, Nichols et al., 2016, Bell et al., 2014).\n\n   In the present study, the model to be tested is a lifestyle intervention using a cost-effective eHealth coaching tool (LIVA) model: following an initial meeting, frequent digital communication is established between health coach and patient, supplemented by machine learning. Machine learning is performed using data automatically gathered from patients' relevant daily lifestyle registrations such as activity level, step count, diet goals fulfilment, sleep, etc. Data will be analysed to predict attrition and outcome. The developed algorithms and models will then be used to increase outcome and decrease dropout by supporting the health coaches with information and guidance how to deliver better coaching directly and indirectly. This intervention will be compared with standard lifestyle interventions in a municipality setting.\n2. Study objectives and hypothesis The aim of this study is to evaluate the clinical efficacy of the LIVA intervention for overweight patients at risk of developing a chronic disease and overweight type 2 diabetes patients in a primary care setting. We hypothesize that the LIVA intervention will lead to significant weight loss, reduced HbA1C, and reduced need for medication compared to usual care.\n3. Methods and analysis Study design and setting The study is a randomized controlled trial with one year of intervention and one year of subsequent maintenance, with continued collection of clinical and questionnaire data, where the primary endpoint is weight loss and the secondary endpoint is HbA1c. The intervention is conducted in a real life setting; all data management will be at the Research Unit for General Practice, Department of Public Health, Primary trial sponsor, J.B. Winsl\u00f8wsvej 9A, 5000 Odense C, Denmark. Recruitment of patients to the study is in 8-10 municipalities within the Region of Southern Denmark and the Capitol Region of Denmark. The study has been registered at https://register.clinicaltrials.gov. On-boarding of patients began in March 2018 and the results are expected to be accessible during 2021.\n\n   Study population and inclusion criteria Flow of patients is described in figure 1. In each municipality, advertising through social media will be used to recruit eligible patients for municipal preventive offers, fulfilling the inclusion criteria in the study (Table 1). These patients will be contacted by phone and/ or email, and informed about the study and asked to register if they accept the offer to participate.\n\n   Table 1. Inclusion and exclusion criteria\n\n   Inclusion criteria:\n\n   BMI 45 \u2265 30 kg/m2 Aged 18 -70 years\n\n   Exclusion criteria:\n\n   Fails to provide informed consent Fails to complete the initial questionnaire or understand Danish No Internet access in own home through computer or smartphone Is pregnant or actively trying to get pregnant Experiences mental or serious life-threatening disease\n\n   The 340 eligible patients will be invited to an introduction meeting with an healthcare professional with a master's in human nutrition or a clinical dietician. This introductory appointment is scheduled within 7-14 days after the information material is received by the patient. The patient is weighed and measured according to defined clinical indicators. Blood indicators are measured through a finger prick blood sample. The patient is then instructed to use a web link to complete a standard quality of life questionnaire (SF-12) combined with registration of medication intake and questions concerning the patient's sociodemographic characteristics, such as educational level, labour market affiliation, questions concerning work performance, and disease history.\n\n   Randomization:\n\n   After patients have successfully completed the web questionnaire, they will be randomized via an automated computer algorithm. This procedure ensures that drop-out characteristics can be recorded. Patients are randomized in a 60:40 sequencing, where 60% of recruited patients are randomized for the intervention group while the remaining 40% will constitute the control group, based on sample size calculations (Please see Sample size calculations, below). Randomization is controlled to ensure that 50% of intervention group and controls will be overweight patients at risk of developing chronic disease and the other 50% of intervention group and controls will be overweight diabetes patients.\n\n   Intervention:\n\n   The intervention is summarised in Table 2. Based on results in the applicant's PhD thesis, the core of the intervention is the initial establishment of an empathic relationship with a healthcare professional who is a clinical dietician by profession and has been working with eHealth lifestyle coaching for more than 2 years (referred to as the health coach) and who delivers effective remote and/or digital coaching responsive to the users' own data registrations (Brandt et al, 2018a). Patients in the intervention group receive a login to the eHealth tool at a personal meeting (either physical or digital) during which the health coach introduces the program. Together, the patient and the health coach agree on goals for diet, physical exercise, sleep, etc. (Brandt et al, 2018b). Using the app, patients fill in a daily record as well as their comments, concerns and questions for the health coach, who will have access to patient profiles. The health coach provides individual asynchronous advice according to the patients' needs based on the patients' own real-time registrations (Brandt et al, 2018c); the health coach's advice is supported by artificial intelligence predictions using machine learning (Holzinger A. et al, 2017). The coach advises on goal setting based on the SMART model: Specific, Measurable, Attainable, Relevant, Timely, and according to a predefined guideline structure (Ryan et al, 2009).\n\n   Asynchronous advice will be provided on a weekly basis during the first 6 months. Subsequently, advice will be given monthly for 6 months. After 12 months, the participant enters maintenance for 12 months, where the coach will still follow patients' registrations and may give four to twelve coaching sessions during that year. Patients can also participate in usual municipally provided preventive medicine offerings, such as \"diabetes school\", to the extent that the municipalities normally provide such offers.\n\n   Conventional care (control group):\n\n   Patients randomized to the control group will be offered standard municipal secondary or tertiary preventive offers.\n\n   Study endpoints and assessment:\n\n   Measurement of endpoints (weight, HbA1c etc.) will be conducted by the health coach at baseline and at 6, 12 and 24 months' follow-up.\n\n   Primary outcome:\n\n   Weight loss from baseline to 12 months' follow-up.\n\n   Secondary outcome Reduction in HbA1c for all patients from baseline to 12 months for patients with T2D.\n\n   Other outcomes\n\n   The following tertiary outcomes will be measured at baseline and at 12 months:\n   * Retention rates among users\n   * Patient waist circumference\n   * Blood pressure\n   * Total cholesterol, LDL, HDL and TG\n   * Patients' quality of life\n   * Changes in patterns of medication Apart from these outcomes, patient demographic characteristics (gender, age, highest educational level) will be measured at baseline.\n\n   Analysis strategy Primary analyses will be performed blinded by statisticians and comprise subgroup analyses based on stratification according to patient characteristics and experiences. Statistical significance will be inferred at a two-tailed and p\\<0.05 significance level. All data will be accessible on the Internet in anonymised form to allow full peer scrutiny and facilitate secondary research.\n\n   Sample size calculations The primary objective of this study is measurement of changes in body weight and waist circumference. Weight loss in the intervention group and control group will be analysed using appropriate statistical procedures. Based on a recent study by Haste and colleagues evaluating a web-based weight loss intervention among men with diabetes, we expect a weight loss of at least 4.5 kg at 12 months in the intervention group, compared to 2.5 kg in the control group, as well as dropout rates of 39% among the intervention group and 57% among control group at 12 months (Haste et al., 2017). A power calculation based on the standard deviations observed in the study performed by Haste et al shows that to detect a difference in weight loss of 2 kg with a power of 0.95% requires 55 patients in the intervention group and 32 in the control group. To be able to stratify analyses according to overweight patients at risk of developing chronic disease and overweight diabetes patients we will therefore recruit 200 (100+100) in the intervention groups and 140 (70+70) controls.\n4. Ethics The intervention is not expected to cause any side effects or discomfort except for the ones a change in lifestyle can bring. The only recognized risk is in relation to eating disorders (pre-existing or developing during the study) and the dieticians and nurses involved in the study will specifically look out for indications of this. The Regional Ethical Committee (Regional Videnskabsetisk Komit\u00e9) have accepted the study in according to Danish law. Participant data will be handled and stored in accordance with rules approved by the Danish Data Inspectorate (Datatilsynet). Permission to handle individual patient data from the national registries will be obtained from patients and the Danish Data Inspectorate. All data will be analysed in anonymous form.\n5. Publication The results of the studies will be published in international journals in accordance with the Vancouver rules. Furthermore, participants will be invited to a presentation of results at the end of the study and news media will be informed.\n6. Conflict of Interests Carl J. Brandt has co-founded and works as a medical consultant for LIVA Healthcare A/S, the company that has developed parts of the technical platform and will host some of it during the study. Carl J. Brandt works at the Research Unit for General Practice and CIMT at SDU. Camilla Sorts\u00f8 is working for LIVA Healthcare A/S, Jens S\u00f8ndergaard, Jesper B. Nielsen and J\u00f8rgen T. Lauridsen have no financial interest in LIVA Healthcare A/S or any other aspects of this study."
+        },
+        "conditionsModule": {
+          "conditions": [
+            "Obesity"
+          ],
+          "keywords": [
+            "obesity",
+            "internet community",
+            "treatment; preventive medicine",
+            "risk perception",
+            "lifestyle counseling"
+          ]
+        },
+        "designModule": {
+          "studyType": "INTERVENTIONAL",
+          "phases": [
+            "NA"
+          ],
+          "designInfo": {
+            "allocation": "RANDOMIZED",
+            "interventionModel": "PARALLEL",
+            "primaryPurpose": "TREATMENT",
+            "maskingInfo": {
+              "masking": "DOUBLE",
+              "whoMasked": [
+                "INVESTIGATOR",
+                "OUTCOMES_ASSESSOR"
+              ]
+            }
+          },
+          "enrollmentInfo": {
+            "count": 340,
+            "type": "ESTIMATED"
+          }
+        },
+        "armsInterventionsModule": {
+          "armGroups": [
+            {
+              "label": "Online dietician lifestyle counseling",
+              "type": "ACTIVE_COMPARATOR",
+              "description": "Online dietetic lifestyle counseling",
+              "interventionNames": [
+                "Behavioral: Online dietetic lifestyle counseling"
+              ]
+            },
+            {
+              "label": "Usual care",
+              "type": "PLACEBO_COMPARATOR",
+              "description": "Usual care",
+              "interventionNames": [
+                "Behavioral: Usual care"
+              ]
+            }
+          ],
+          "interventions": [
+            {
+              "type": "BEHAVIORAL",
+              "name": "Online dietetic lifestyle counseling",
+              "description": "The certified clinical dieticians provide individual therapy online and offline according to their patients' needs and based on information supplied via the website \"www.livalife.dk\". The dietician generates a daily caloric reduction plan of approximately 1600-4800 KJ based on the patients' diet record. The dietary advice will be standardized and follow the dietary guidelines given at \"www.livalife.dk\" and the Danish Health Administration (Sundhedsstyrelsen).",
+              "armGroupLabels": [
+                "Online dietician lifestyle counseling"
+              ]
+            },
+            {
+              "type": "BEHAVIORAL",
+              "name": "Usual care",
+              "description": "Patients randomized to the control group will be offered to receive usual municipal secondary or tertiary preventive offers.",
+              "armGroupLabels": [
+                "Usual care"
+              ]
+            }
+          ]
+        },
+        "outcomesModule": {
+          "primaryOutcomes": [
+            {
+              "measure": "Weight change",
+              "description": "kg",
+              "timeFrame": "Baseline, 6, 12, and 24 months"
+            }
+          ],
+          "secondaryOutcomes": [
+            {
+              "measure": "HbA1C change",
+              "description": "mmol/mol",
+              "timeFrame": "Baseline, 6, 12 and 24 months"
+            }
+          ],
+          "otherOutcomes": [
+            {
+              "measure": "Medicine usage change",
+              "description": "Registration of medicine usage by healthcare professional",
+              "timeFrame": "Baseline, 6, 12 and 24 months"
+            },
+            {
+              "measure": "SF-12 Quality of life change",
+              "description": "Validated quality of life questionaire SF-12",
+              "timeFrame": "Baseline, 6, 12, and 24 months"
+            },
+            {
+              "measure": "Retention rate change",
+              "description": "How many users are active in the collaborative eHealth tool/a usual care program",
+              "timeFrame": "Baseline, 6, 12 and 24 months"
+            }
+          ]
+        },
+        "eligibilityModule": {
+          "eligibilityCriteria": "Inclusion criteria:\n\n* BMI \u2265 30 kg/m2 and \\< 45 kg/m2\n* Aged 18 -70 years\n\nExclusion criteria:\n\n* Fails to provide informed consent\n* Fails to complete the initial questionnaire\n* No Internet access in own home through computer or smartphone\n* Is pregnant or actively trying to get pregnant\n* Experiences serious or life-threatening disease",
+          "healthyVolunteers": false,
+          "sex": "ALL",
+          "minimumAge": "18 Years",
+          "maximumAge": "70 Years",
+          "stdAges": [
+            "ADULT",
+            "OLDER_ADULT"
+          ]
+        },
+        "contactsLocationsModule": {
+          "overallOfficials": [
+            {
+              "name": "Jens S\u00f8ndergaard, Professor",
+              "affiliation": "University of Southern Denmark",
+              "role": "STUDY_DIRECTOR"
+            }
+          ],
+          "locations": [
+            {
+              "facility": "Research Unit for General Practice, Department for Public Health, University of Southern Denmark",
+              "status": "RECRUITING",
+              "city": "Odense",
+              "state": "Region Syddanmark",
+              "country": "Denmark",
+              "contacts": [
+                {
+                  "name": "Carl J Brandt, MD",
+                  "role": "CONTACT",
+                  "phone": "+45 2014 1566",
+                  "email": "cbrandt@health.sdu.dk"
+                },
+                {
+                  "name": "Jens S\u00f8ndergaard, PhD",
+                  "role": "CONTACT",
+                  "phone": "+45 6550 3830",
+                  "email": "jsoendergaard@health.sdu.dk"
+                },
+                {
+                  "name": "Jens S\u00f8ndergaard, PhD",
+                  "role": "PRINCIPAL_INVESTIGATOR"
+                },
+                {
+                  "name": "Jesper B Nielsen, PhD",
+                  "role": "SUB_INVESTIGATOR"
+                },
+                {
+                  "name": "Carl J Brandt, PhD",
+                  "role": "SUB_INVESTIGATOR"
+                }
+              ],
+              "geoPoint": {
+                "lat": 55.39594,
+                "lon": 10.38831
+              }
+            },
+            {
+              "facility": "L\u00e6gehuset i Stenstrup",
+              "status": "RECRUITING",
+              "city": "Stenstrup",
+              "zip": "5700",
+              "country": "Denmark",
+              "contacts": [
+                {
+                  "name": "Jacob B Madsen, MD",
+                  "role": "CONTACT",
+                  "phone": "63621015",
+                  "email": "info@laegehusetistenstrup.dk"
+                },
+                {
+                  "name": "Cees Stauvenuiter, MD",
+                  "role": "CONTACT",
+                  "phone": "63621015",
+                  "email": "info@laegehusetistenstrup.dk"
+                },
+                {
+                  "name": "Jacob B Madsen, MD",
+                  "role": "PRINCIPAL_INVESTIGATOR"
+                },
+                {
+                  "name": "Cees Stavenuiter, MD",
+                  "role": "SUB_INVESTIGATOR"
+                }
+              ],
+              "geoPoint": {
+                "lat": 56.7289,
+                "lon": 9.89499
+              }
+            }
+          ]
+        },
+        "referencesModule": {
+          "references": [
+            {
+              "pmid": "27581172",
+              "type": "BACKGROUND",
+              "citation": "Afshin A, Babalola D, Mclean M, Yu Z, Ma W, Chen CY, Arabi M, Mozaffarian D. Information Technology and Lifestyle: A Systematic Evaluation of Internet and Mobile Interventions for Improving Diet, Physical Activity, Obesity, Tobacco, and Alcohol Use. J Am Heart Assoc. 2016 Aug 31;5(9):e003058. doi: 10.1161/JAHA.115.003058."
+            },
+            {
+              "pmid": "28810024",
+              "type": "BACKGROUND",
+              "citation": "Johansen MY, MacDonald CS, Hansen KB, Karstoft K, Christensen R, Pedersen M, Hansen LS, Zacho M, Wedell-Neergaard AS, Nielsen ST, Iepsen UW, Langberg H, Vaag AA, Pedersen BK, Ried-Larsen M. Effect of an Intensive Lifestyle Intervention on Glycemic Control in Patients With Type 2 Diabetes: A Randomized Clinical Trial. JAMA. 2017 Aug 15;318(7):637-646. doi: 10.1001/jama.2017.10169."
+            },
+            {
+              "pmid": "29221645",
+              "type": "BACKGROUND",
+              "citation": "Lean ME, Leslie WS, Barnes AC, Brosnahan N, Thom G, McCombie L, Peters C, Zhyzhneuskaya S, Al-Mrabeh A, Hollingsworth KG, Rodrigues AM, Rehackova L, Adamson AJ, Sniehotta FF, Mathers JC, Ross HM, McIlvenna Y, Stefanetti R, Trenell M, Welsh P, Kean S, Ford I, McConnachie A, Sattar N, Taylor R. Primary care-led weight management for remission of type 2 diabetes (DiRECT): an open-label, cluster-randomised trial. Lancet. 2018 Feb 10;391(10120):541-551. doi: 10.1016/S0140-6736(17)33102-1. Epub 2017 Dec 5."
+            },
+            {
+              "type": "BACKGROUND",
+              "citation": "Brandt V, Brandt CJ, Glintborg D, Arendal C, Toubro S, Brandt K. Sustained weight loss during 20 months using a personalized interactive internet based dietician advice program in a general practice setting. International Journal on Advances in Life Sciences [Internet]. 2011; 3(1&2):[23-8 pp.]."
+            },
+            {
+              "pmid": "30291100",
+              "type": "BACKGROUND",
+              "citation": "Haste A, Adamson AJ, McColl E, Araujo-Soares V, Bell R. Web-Based Weight Loss Intervention for Men With Type 2 Diabetes: Pilot Randomized Controlled Trial. JMIR Diabetes. 2017 Jul 7;2(2):e14. doi: 10.2196/diabetes.7430."
+            },
+            {
+              "pmid": "38375882",
+              "type": "DERIVED",
+              "citation": "Metzendorf MI, Wieland LS, Richter B. Mobile health (m-health) smartphone interventions for adolescents and adults with overweight or obesity. Cochrane Database Syst Rev. 2024 Feb 20;2(2):CD013591. doi: 10.1002/14651858.CD013591.pub2."
+            },
+            {
+              "pmid": "36149735",
+              "type": "DERIVED",
+              "citation": "Hesseldal L, Christensen JR, Olesen TB, Olsen MH, Jakobsen PR, Laursen DH, Lauridsen JT, Nielsen JB, Sondergaard J, Brandt CJ. Long-term Weight Loss in a Primary Care-Anchored eHealth Lifestyle Coaching Program: Randomized Controlled Trial. J Med Internet Res. 2022 Sep 23;24(9):e39741. doi: 10.2196/39741."
+            },
+            {
+              "pmid": "36047606",
+              "type": "DERIVED",
+              "citation": "Imeraj A, Olesen TB, Laursen DH, Sondergaard J, Brandt CJ. Agreement Between Clinically Measured Weight and Self-reported Weight Among Patients With Type 2 Diabetes Through an mHealth Lifestyle Coaching Program in Denmark: Secondary Analysis of a Randomized Controlled Trial. JMIR Form Res. 2022 Sep 14;6(9):e40739. doi: 10.2196/40739."
+            },
+            {
+              "pmid": "32584260",
+              "type": "DERIVED",
+              "citation": "Brandt CJ, Christensen JR, Lauridsen JT, Nielsen JB, Sondergaard J, Sortso C. Evaluation of the Clinical and Economic Effects of a Primary Care Anchored, Collaborative, Electronic Health Lifestyle Coaching Program in Denmark: Protocol for a Two-Year Randomized Controlled Trial. JMIR Res Protoc. 2020 Jun 25;9(6):e19172. doi: 10.2196/19172."
+            }
+          ],
+          "seeAlsoLinks": [
+            {
+              "label": "Liva Healthcare Collaborative eHealth solution",
+              "url": "http://www.livahealthcare.com"
+            }
+          ]
+        },
+        "ipdSharingStatementModule": {
+          "ipdSharing": "YES",
+          "description": "The study protocol along with the statistical analysis plan (SAP) will be published and all data from the study will be made available in a clinical study report.",
+          "infoTypes": [
+            "STUDY_PROTOCOL",
+            "SAP",
+            "CSR"
+          ],
+          "timeFrame": "The protocol along with SAP and some of the preliminary results after 6 months will be published within 18 months from start of study.\n\nThe clinical study report (CSR) will be published within 12 months of the end of the study.",
+          "accessCriteria": "Study protocol and SAP will be published in international peer review journals and the CSR will at a minimum be made available via the internet through SDU and Researchgate"
+        }
+      }
+    },
+    {
+      "protocolSection": {
+        "identificationModule": {
+          "nctId": "NCT02406976",
+          "orgStudyIdInfo": {
+            "id": "10-0328"
+          },
+          "organization": {
+            "fullName": "Hospital de Clinicas de Porto Alegre",
+            "class": "OTHER"
+          },
+          "briefTitle": "Effect Physical Exercise in Morbid Obesity",
+          "officialTitle": "Effect of Physical Exercise on Different Approaches to Treatment of Morbid Obesity"
+        },
+        "statusModule": {
+          "statusVerifiedDate": "2017-03",
+          "overallStatus": "UNKNOWN",
+          "lastKnownStatus": "ACTIVE_NOT_RECRUITING",
+          "expandedAccessInfo": {
+            "hasExpandedAccess": false
+          },
+          "startDateStruct": {
+            "date": "2010-08"
+          },
+          "primaryCompletionDateStruct": {
+            "date": "2015-11",
+            "type": "ACTUAL"
+          },
+          "completionDateStruct": {
+            "date": "2018-11",
+            "type": "ESTIMATED"
+          },
+          "studyFirstSubmitDate": "2015-03-30",
+          "studyFirstSubmitQcDate": "2015-04-01",
+          "studyFirstPostDateStruct": {
+            "date": "2015-04-02",
+            "type": "ESTIMATED"
+          },
+          "lastUpdateSubmitDate": "2017-03-10",
+          "lastUpdatePostDateStruct": {
+            "date": "2017-03-14",
+            "type": "ACTUAL"
+          }
+        },
+        "sponsorCollaboratorsModule": {
+          "responsibleParty": {
+            "type": "SPONSOR"
+          },
+          "leadSponsor": {
+            "name": "Hospital de Clinicas de Porto Alegre",
+            "class": "OTHER"
+          }
+        },
+        "oversightModule": {
+          "oversightHasDmc": false
+        },
+        "descriptionModule": {
+          "briefSummary": "This objective study to verify the effect of physical training with and without behavioral cognitive therapy, compared with controls, in functional capacity and cardio-metabolic profile in individuals with morbidly obese",
+          "detailedDescription": "This study is a Randomized Clinical Trial, with individuals with morbid obesity, and will be consists of 3 groups:\n\n1. Group 1 (G1 EXERCISE): This group will participate in an physical exercise program twice a week in hospital.\n2. Group 2 (G2 - LIFESTYLE AND EXERCISE): This groups will receive the same G1 intervention associated with a weekly group followed up with techniques of cognitive behavioral therapy with a psychologist\n3. Group 3 (G3 - CONTROL): This group will keep medical appointments information and routine procedure in the hospital.\n\nWill be included in study the individuals with morbid obesity who do not have contraindications to practice low-intensity exercise.\n\nExclusion criteria are contraindications to physical exercise, individuals with cardiovascular disease with reduced functional capacity (class III and IV of the New York Heart Association), orthopedic problems, severe retinopathy, severe neuropathy, drug addicts and severe mental illness, metabolic or blood pressure decompensated."
+        },
+        "conditionsModule": {
+          "conditions": [
+            "Morbid Obesity"
+          ],
+          "keywords": [
+            "Exercise",
+            "Morbidity Obesity"
+          ]
+        },
+        "designModule": {
+          "studyType": "INTERVENTIONAL",
+          "phases": [
+            "NA"
+          ],
+          "designInfo": {
+            "allocation": "RANDOMIZED",
+            "interventionModel": "PARALLEL",
+            "primaryPurpose": "TREATMENT",
+            "maskingInfo": {
+              "masking": "SINGLE",
+              "whoMasked": [
+                "OUTCOMES_ASSESSOR"
+              ]
+            }
+          },
+          "enrollmentInfo": {
+            "count": 60,
+            "type": "ESTIMATED"
+          }
+        },
+        "armsInterventionsModule": {
+          "armGroups": [
+            {
+              "label": "G1- EXERCISE",
+              "type": "EXPERIMENTAL",
+              "description": "The group will Participate in an physical exercise program twice a week. This program consists of 20 minutes of aerobic exercises of low intensity (2-4 on the Borg scale) in the rhythm of different songs that encourage their implementation. After these exercises will be performed five minutes of stretching exercises.",
+              "interventionNames": [
+                "Other: G1 -Exercise",
+                "Other: G3- Control"
+              ]
+            },
+            {
+              "label": "G2- EXERCISE AND LIFESTYLE",
+              "type": "EXPERIMENTAL",
+              "description": "This groups will receive the same intervention of G1 group, associated with the weekly group with a psychologist.\n\nThese groups worked techniques of cognitive behavioral therapy based on principles of learning, in order to promote and maintain new healthy behaviors, as well as the reduction or elimination of undesirable conduct.",
+              "interventionNames": [
+                "Behavioral: G2- Exercise and Lifestyle",
+                "Other: G3- Control"
+              ]
+            },
+            {
+              "label": "G3- CONTROL",
+              "type": "ACTIVE_COMPARATOR",
+              "description": "This group will keep the routine treatment in outpatient of bariatric surgery. This treatment consists of individual consultations and 05 (five) information meetings organized by the multidisciplinary team composed by the surgeon, endocrinologist, psychologist, psychiatrist, nutritionist, physical education teacher, pulmonologist, cardiologist and nurse. The G1 and G2 will also receive this intervention.",
+              "interventionNames": [
+                "Other: G3- Control"
+              ]
+            }
+          ],
+          "interventions": [
+            {
+              "type": "OTHER",
+              "name": "G1 -Exercise",
+              "description": "20 minutes of aerobic exercises of low intensity (2-4 on the Borg scale) in the rhythm of different songs that encourage their implementation. After these exercises will be performed five minutes of stretching exercises.\n\nFurthermore the similar treatment to G3.",
+              "armGroupLabels": [
+                "G1- EXERCISE"
+              ]
+            },
+            {
+              "type": "BEHAVIORAL",
+              "name": "G2- Exercise and Lifestyle",
+              "description": "Exercise more techniques of cognitive behavioral therapy based on principles of learning, in order to promote and maintain new healthy behaviors and the reduction or elimination of undesirable conduct.\n\nFurthermore the similar treatment to G3.",
+              "armGroupLabels": [
+                "G2- EXERCISE AND LIFESTYLE"
+              ]
+            },
+            {
+              "type": "OTHER",
+              "name": "G3- Control",
+              "description": "Routine treatment in outpatient of bariatric surgery. Consists of individual consultations and 05 (five) information meetings organized by the multidisciplinary team composed by the surgeon, endocrinologist, psychologist, psychiatrist, nutritionist, physical education teacher, pulmonologist, cardiologist and nurse. The G1 and G2 will also receive this intervention.",
+              "armGroupLabels": [
+                "G1- EXERCISE",
+                "G2- EXERCISE AND LIFESTYLE",
+                "G3- CONTROL"
+              ]
+            }
+          ]
+        },
+        "outcomesModule": {
+          "primaryOutcomes": [
+            {
+              "measure": "Change in Weight Loss",
+              "timeFrame": "baseline and Four months"
+            }
+          ],
+          "secondaryOutcomes": [
+            {
+              "measure": "Metabolic Parameters (composite)",
+              "description": "Metabolic parameters will be evaluated using total cholesterol, HDL, triglycerides and glucose (Assessment at baseline and 4 months).",
+              "timeFrame": "baseline and Four months"
+            },
+            {
+              "measure": "Six minute walk test (6MWT)",
+              "description": "Functional capacity will be evaluated using the six minute walk test (6MWT)",
+              "timeFrame": "baseline and Four months"
+            }
+          ]
+        },
+        "eligibilityModule": {
+          "eligibilityCriteria": "Inclusion Criteria:\n\n* Individuals with morbid obesity\n* Individuals do not have contraindications to practice low-intensity exercise.\n\nExclusion Criteria:\n\n* Contraindications to physical exercise\n* Cardiovascular disease with reduced functional capacity (class III and IV of the New York Heart Association)\n* Orthopedic problems\n* Severe retinopathy\n* Severe neuropathy\n* Drug addicts and severe mental illness\n* High blood pressure or metabolic decompensation",
+          "healthyVolunteers": false,
+          "sex": "ALL",
+          "minimumAge": "18 Years",
+          "stdAges": [
+            "ADULT",
+            "OLDER_ADULT"
+          ]
+        },
+        "contactsLocationsModule": {
+          "overallOfficials": [
+            {
+              "name": "Manoel R Trindade, PhD",
+              "affiliation": "Hospital de Clinicas de Porto Alegre",
+              "role": "PRINCIPAL_INVESTIGATOR"
+            }
+          ],
+          "locations": [
+            {
+              "facility": "Hospital de Cl\u00ednicas de Porto Alegre",
+              "city": "Porto Alegre",
+              "state": "Rio Grande do Sul",
+              "zip": "90035 903",
+              "country": "Brazil",
+              "geoPoint": {
+                "lat": -30.03283,
+                "lon": -51.23019
+              }
+            }
+          ]
+        },
+        "referencesModule": {
+          "references": [
+            {
+              "pmid": "21881816",
+              "type": "BACKGROUND",
+              "citation": "Marcon ER, Gus I, Neumann CR. [Impact of a minimum program of supervised exercises in the cardiometabolic risk in patients with morbid obesity]. Arq Bras Endocrinol Metabol. 2011 Jun;55(5):331-8. doi: 10.1590/s0004-27302011000500006. Portuguese."
+            },
+            {
+              "type": "BACKGROUND",
+              "citation": "Fonseca Jr SJ, et al. Exerc\u00edcio F\u00edsico e Obesidade M\u00f3rbida: Uma Revis\u00e3o Sistem\u00e1tica. ABCD Arq Bras Cir Dig 2013;26(Suplemento 1):67-73"
+            }
+          ]
+        },
+        "ipdSharingStatementModule": {
+          "ipdSharing": "UNDECIDED"
+        }
+      }
+    }
+  ],
+  "nextPageToken": "ZVt07cGHkvI2wRk2CJf6_LLty4bYcdRrd7KrgP4fnjae"
+}
