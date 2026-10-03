@@ -72,11 +72,16 @@ def diversify(chunk_ids: list[str], limit: int, max_per_document: int) -> list[s
 
 
 def _default_embedding_fn():
-    from chromadb.utils import embedding_functions
+    """all-MiniLM-L6-v2 run through ONNX, so PyTorch is not needed at all.
 
-    return embedding_functions.SentenceTransformerEmbeddingFunction(
-        model_name="all-MiniLM-L6-v2"
-    )
+    The model is kept inside the project rather than the home cache, so a
+    deploy that builds the index ahead of time also ships the model with it.
+    """
+    from chromadb.utils.embedding_functions import ONNXMiniLM_L6_V2
+
+    embedding_fn = ONNXMiniLM_L6_V2()
+    embedding_fn.DOWNLOAD_PATH = config.MODEL_DIR / ONNXMiniLM_L6_V2.MODEL_NAME
+    return embedding_fn
 
 
 class HybridRetriever:

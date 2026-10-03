@@ -12,6 +12,7 @@ DATA_DIR = ROOT / "data"
 RAW_DIR = DATA_DIR / "raw"
 DB_PATH = DATA_DIR / "pharmaiq.db"
 CHROMA_DIR = ROOT / "chroma_db"
+MODEL_DIR = ROOT / "models"
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 GROQ_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")

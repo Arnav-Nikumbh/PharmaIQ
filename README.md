@@ -43,6 +43,15 @@ uv run streamlit run app.py
 Get a free key at [console.groq.com](https://console.groq.com). The first
 ingest downloads a small embedding model, about 80MB, once.
 
+### Deploying to Render
+
+`render.yaml` describes the service. In the Render dashboard choose
+**New > Blueprint**, pick this repository, and paste your Groq key when asked
+for `GROQ_API_KEY`. `render-build.sh` installs dependencies, builds the
+database and ingests the three starter topics on every deploy, since `data/`
+and `chroma_db/` are not in the repository. Embeddings run through ONNX rather
+than PyTorch, which keeps the app inside the free plan's 512MB of memory.
+
 ---
 
 ## How a question is answered
