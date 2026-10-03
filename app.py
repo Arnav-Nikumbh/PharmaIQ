@@ -207,7 +207,7 @@ def sidebar():
             if covers["countries"]:
                 st.markdown(
                     '<p class="piq-note" style="margin-top:0.6rem">Customers are in '
-                    f'{html.escape(", ".join(covers["countries"]))} only.</p>',
+                    f'{html.escape(" and ".join(covers["countries"]))}.</p>',
                     unsafe_allow_html=True,
                 )
 

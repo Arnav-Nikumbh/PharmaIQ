@@ -51,12 +51,12 @@ def test_seed_fills_every_table():
 def test_seed_row_counts_match_the_spec():
     conn = _seeded()
     assert _count(conn, "Categories") == 10
-    assert _count(conn, "Region") == 4
-    assert _count(conn, "Territories") == 20
-    assert _count(conn, "Employees") == 10
-    assert _count(conn, "Customers") == 90
+    assert _count(conn, "Region") == 5
+    assert _count(conn, "Territories") == 26
+    assert _count(conn, "Employees") == 13
+    assert _count(conn, "Customers") == 120
     assert _count(conn, "Products") == 60
-    assert _count(conn, "Orders") == 3000
+    assert _count(conn, "Orders") == 3600
 
 
 def test_category_names_are_plain_language():
@@ -99,3 +99,37 @@ def test_orders_span_twenty_four_months():
     assert lo < hi
     assert lo.startswith("2024-")
     assert hi.startswith("2026-")
+
+
+def test_india_customers_sit_in_the_india_region():
+    conn = _seeded()
+    rows = conn.execute(
+        "SELECT cu.Country, r.RegionDescription, COUNT(*) AS n FROM Customers cu "
+        "JOIN Territories t ON t.TerritoryID = cu.TerritoryID "
+        "JOIN Region r ON r.RegionID = t.RegionID "
+        "GROUP BY cu.Country, r.RegionDescription"
+    ).fetchall()
+    india = [(r["RegionDescription"], r["n"]) for r in rows if r["Country"] == "India"]
+    assert india == [("India", 30)]
+    assert all(r["RegionDescription"] != "India" for r in rows if r["Country"] == "USA")
+
+
+def test_india_has_orders_handled_by_india_reps():
+    conn = _seeded()
+    rows = conn.execute(
+        "SELECT DISTINCT e.LastName FROM Orders o "
+        "JOIN Customers cu ON cu.CustomerID = o.CustomerID "
+        "JOIN Employees e ON e.EmployeeID = o.EmployeeID "
+        "WHERE cu.Country = 'India'"
+    ).fetchall()
+    assert {r["LastName"] for r in rows} == {"Sharma", "Iyer", "Reddy"}
+
+
+def test_every_territory_has_exactly_one_rep():
+    conn = _seeded()
+    uncovered = conn.execute(
+        "SELECT t.TerritoryID FROM Territories t "
+        "LEFT JOIN EmployeeTerritories et ON et.TerritoryID = t.TerritoryID "
+        "GROUP BY t.TerritoryID HAVING COUNT(et.EmployeeID) != 1"
+    ).fetchall()
+    assert uncovered == []

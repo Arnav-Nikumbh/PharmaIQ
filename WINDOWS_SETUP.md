@@ -133,17 +133,17 @@ uv run python -m database.build
 ```
 
 This creates `data\pharmaiq.db` and fills it with generated sales data: 60
-products across 10 therapy areas, 90 customer accounts, 20 territories, and
-3000 orders. All of it is synthetic. None of it is real business data.
+products across 10 therapy areas, 120 customer accounts (90 in the USA, 30 in
+India), 26 territories across five regions, and 3600 orders. All of it is synthetic. None of it is real business data.
 
 You should see the therapy areas listed with their totals:
 
 ```
 Database built at C:\Users\you\PharmaIQ\data\pharmaiq.db
 Total sales by therapy area:
-  Heart Health           4,513,585.23
-  Diabetes Care          4,110,869.96
-  Mental Health          3,878,789.78
+  Diabetes Care          6,165,416.47
+  Heart Health           6,092,481.18
+  Mental Health          4,510,484.49
   ...
 ```
 
@@ -219,7 +219,7 @@ The sidebar should show:
 
 ```
 Research extracts   731
-Orders              3,000
+Orders              3,600
 ```
 
 If it says 0 extracts, step 7 did not finish. If it warns about a missing API

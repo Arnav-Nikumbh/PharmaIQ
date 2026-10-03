@@ -18,12 +18,14 @@ MAX_ATTEMPTS = 3
 TABLE_MEANINGS = """What the tables represent:
 - Categories: therapy areas, in plain language (for example "Weight Management")
 - Products: individual medicines. ProductName is the brand, CategoryID its therapy area
-- Customers: clinics, hospitals and practices that place orders
+- Customers: clinics, hospitals and practices that place orders. Country is
+  'USA' or 'India'
 - Employees: sales representatives
-- Territories and Region: a territory sits inside one of four regions
+- Territories and Region: a territory sits inside one of five regions. North,
+  South, East and West are in the USA; India is a region of its own
 - Orders: one order placed by a customer, handled by a representative
 - OrderDetails: the line items of an order. Revenue is
-  UnitPrice * Quantity * (1 - Discount)"""
+  UnitPrice * Quantity * (1 - Discount). All amounts are in US dollars"""
 
 SYSTEM_PROMPT = """You write SQLite queries for a pharmaceutical sales database.
 

@@ -104,15 +104,34 @@ CATEGORIES = [
     ("Skin Care", "Treatments for skin conditions"),
 ]
 
-REGIONS = ["North", "South", "East", "West"]
+# North, South, East and West are US regions. India is a market of its own.
+REGIONS = ["North", "South", "East", "West", "India"]
 
-# Territories are assigned to regions five at a time, in list order.
+# US territories are assigned to the first four regions five at a time, in
+# list order.
 TERRITORY_NAMES = [
     "Boston", "Hartford", "Buffalo", "Pittsburgh", "Cleveland",
     "Atlanta", "Orlando", "Nashville", "Charlotte", "New Orleans",
     "New York", "Philadelphia", "Baltimore", "Newark", "Richmond",
     "Denver", "Phoenix", "Seattle", "San Diego", "Portland",
 ]
+
+# India is generated after all the US data, from the same random stream, so
+# adding it left every US figure unchanged.
+INDIA_REGION_ID = REGIONS.index("India") + 1
+INDIA_TERRITORY_NAMES = ["Mumbai", "Pune", "Delhi", "Bengaluru", "Chennai", "Hyderabad"]
+INDIA_REPS = [("Sharma", "Ananya"), ("Iyer", "Karthik"), ("Reddy", "Vikram")]
+INDIA_CUSTOMERS = 30
+INDIA_ORDERS = 600
+# Diabetes Care and Heart Health products are ordered more often in India.
+INDIA_FOCUS = {"Diabetes Care": 3, "Heart Health": 2}
+
+_IN_FIRST_NAMES = ["Aarav", "Kavya", "Rohan", "Isha", "Arjun", "Meera", "Karan", "Diya",
+                   "Nikhil", "Sneha"]
+_IN_LAST_NAMES = ["Sharma", "Iyer", "Mehta", "Reddy", "Nair", "Gupta", "Rao", "Kapoor",
+                  "Das", "Joshi"]
+_IN_CLINIC_NAMES = ["Lotus", "Sunrise", "Banyan", "Neem", "Lakeshore", "Greenfield",
+                    "Crescent", "Silverline", "Harbour", "Meadow"]
 
 _PREFIXES = ["Ava", "Cardi", "Dermi", "Gluco", "Neuro", "Onco", "Pulmo", "Rheu", "Somni", "Vaso"]
 _SUFFIXES = ["dex", "lex", "min", "nix", "prin", "sar", "tide", "vir", "zan", "zole"]
@@ -151,10 +170,14 @@ def seed(conn: sqlite3.Connection) -> None:
     territories = []
     for i, name in enumerate(TERRITORY_NAMES):
         territories.append((f"T{i + 1:03d}", name, (i // 5) + 1))
+    india_territories = [
+        (f"T{len(territories) + i + 1:03d}", name, INDIA_REGION_ID)
+        for i, name in enumerate(INDIA_TERRITORY_NAMES)
+    ]
     conn.executemany(
         "INSERT INTO Territories (TerritoryID, TerritoryDescription, RegionID) "
         "VALUES (?, ?, ?)",
-        territories,
+        territories + india_territories,
     )
 
     employees = [
@@ -167,14 +190,27 @@ def seed(conn: sqlite3.Connection) -> None:
         )
         for i in range(10)
     ]
+    india_reps = [
+        (
+            len(employees) + i + 1,
+            last,
+            first,
+            "Sales Representative",
+            (date(2023, 4, 3) + timedelta(days=61 * i)).isoformat(),
+        )
+        for i, (last, first) in enumerate(INDIA_REPS)
+    ]
     conn.executemany(
         "INSERT INTO Employees (EmployeeID, LastName, FirstName, Title, HireDate) "
         "VALUES (?, ?, ?, ?, ?)",
-        employees,
+        employees + india_reps,
     )
 
     # Each rep covers two territories; every territory has exactly one rep.
     emp_territories = [((i % 10) + 1, t[0]) for i, t in enumerate(territories)]
+    emp_territories += [
+        (india_reps[i % len(india_reps)][0], t[0]) for i, t in enumerate(india_territories)
+    ]
     conn.executemany(
         "INSERT INTO EmployeeTerritories (EmployeeID, TerritoryID) VALUES (?, ?)",
         emp_territories,
@@ -217,11 +253,6 @@ def seed(conn: sqlite3.Connection) -> None:
             territory_id,
             "USA",
         ))
-    conn.executemany(
-        "INSERT INTO Customers (CustomerID, CompanyName, ContactName, ContactTitle, "
-        "City, TerritoryID, Country) VALUES (?, ?, ?, ?, ?, ?, ?)",
-        customers,
-    )
 
     territory_rep = {t_id: emp_id for emp_id, t_id in emp_territories}
     start = date(2024, 10, 1)
@@ -246,6 +277,56 @@ def seed(conn: sqlite3.Connection) -> None:
                 rng.randint(1, 40),
                 rng.choice([0.0, 0.0, 0.0, 0.05, 0.10]),
             ))
+
+    # India comes last so the random draws above, and every US figure, are
+    # the same as before it was added.
+    india_customers = []
+    for i in range(INDIA_CUSTOMERS):
+        territory_id, city, _ = india_territories[i % len(india_territories)]
+        india_customers.append((
+            f"C{len(customers) + i + 1:04d}",
+            f"{rng.choice(_IN_CLINIC_NAMES)} {rng.choice(_CLINIC_KINDS)}",
+            f"{rng.choice(_IN_FIRST_NAMES)} {rng.choice(_IN_LAST_NAMES)}",
+            rng.choice(["Physician", "Pharmacy Lead", "Procurement Manager",
+                        "Clinical Director"]),
+            city,
+            territory_id,
+            "India",
+        ))
+
+    product_ids = [p[0] for p in products]
+    weights = [INDIA_FOCUS.get(CATEGORIES[p[2] - 1][0], 1) for p in products]
+    for order_id in range(len(orders) + 1, len(orders) + INDIA_ORDERS + 1):
+        customer = india_customers[rng.randrange(len(india_customers))]
+        customer_id, territory_id = customer[0], customer[5]
+        order_date = start + timedelta(days=rng.randrange(730))
+        orders.append((
+            order_id,
+            customer_id,
+            territory_rep[territory_id],
+            order_date.isoformat(),
+            territory_id,
+        ))
+        line_count = rng.randint(1, 4)
+        chosen: list[int] = []
+        while len(chosen) < line_count:
+            product_id = rng.choices(product_ids, weights)[0]
+            if product_id not in chosen:
+                chosen.append(product_id)
+        for product_id in chosen:
+            details.append((
+                order_id,
+                product_id,
+                products[product_id - 1][3],
+                rng.randint(1, 40),
+                rng.choice([0.0, 0.0, 0.0, 0.05, 0.10]),
+            ))
+
+    conn.executemany(
+        "INSERT INTO Customers (CustomerID, CompanyName, ContactName, ContactTitle, "
+        "City, TerritoryID, Country) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        customers + india_customers,
+    )
     conn.executemany(
         "INSERT INTO Orders (OrderID, CustomerID, EmployeeID, OrderDate, TerritoryID) "
         "VALUES (?, ?, ?, ?, ?)",

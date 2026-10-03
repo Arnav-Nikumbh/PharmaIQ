@@ -59,7 +59,7 @@ def test_a_realistic_analytics_query_runs(db):
         GROUP BY r.RegionDescription
         ORDER BY TotalSales DESC
     """)
-    assert len(rows) == 4
+    assert len(rows) == 5
     assert rows[0]["TotalSales"] > 0
 
 

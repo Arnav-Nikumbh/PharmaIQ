@@ -45,13 +45,15 @@ should read "Looked at our sales data only".
 What is the total revenue for each region?
 ```
 
-Expected, all four regions:
+Expected, all five regions. North, South, East and West are in the USA;
+India is a region of its own:
 
 | Region | Revenue |
 |---|---|
 | South | $9,876,520.78 |
 | North | $9,755,701.78 |
 | West | $7,764,594.87 |
+| India | $7,735,722.51 |
 | East | $7,280,546.95 |
 
 ### 1.2 Top territories
@@ -76,8 +78,8 @@ Expected, in this order:
 Which three therapy areas generate the most revenue overall?
 ```
 
-Expected: Heart Health ($4,513,585.23), Diabetes Care ($4,110,869.96), Mental
-Health ($3,878,789.78).
+Expected: Diabetes Care ($6,165,416.47), Heart Health ($6,092,481.18), Mental
+Health ($4,510,484.49).
 
 ### 1.4 A harder join
 
@@ -97,7 +99,7 @@ territory mapping. Getting the right name means the join was correct.
 How many products, customers and orders are in the database?
 ```
 
-Expected: 60 products, 90 customers, 3000 orders.
+Expected: 60 products, 120 customers (90 in the USA, 30 in India), 3600 orders.
 
 ### 1.6 One therapy area in one region
 
@@ -108,6 +110,17 @@ Which therapy areas are selling best in the West region?
 Expected, all ten, starting with Diabetes Care ($1,001,037.51), Heart Health
 ($934,494.76), Pain Relief ($894,592.72) and ending with Infection Control
 ($557,358.76).
+
+### 1.7 India
+
+```
+Which therapy areas are selling best in India?
+```
+
+Expected, all ten, starting with Diabetes Care ($2,054,546.51), Heart Health
+($1,578,895.96), Weight Management ($728,333.52) and ending with Skin Care
+($279,524.09). India's six territories are Mumbai, Pune, Delhi, Bengaluru,
+Chennai and Hyderabad, with Pune the largest at $1,467,565.50.
 
 ---
 
@@ -182,12 +195,13 @@ figures:
 | South | $1,196,452.87 | $1,202,542.41 |
 | East | $823,242.78 | $939,137.14 |
 | West | $1,001,037.51 | $934,494.76 |
+| India | $2,054,546.51 | $1,578,895.96 |
 
 In the panels you should see `Diabetes Care` and `Heart Health` listed as found
 in the catalogue, and the generated query filtering on exactly those two names.
 
-Note that Heart Health leads in three regions but Diabetes Care leads in the
-West. A good answer points that out. It should not invent a reason for it.
+Note that Heart Health leads in North, South and East, while Diabetes Care
+leads in the West and, by a wide margin, in India. A good answer points that out. It should not invent a reason for it.
 
 ### 3.2 Research drives the filter
 
