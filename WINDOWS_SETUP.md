@@ -218,8 +218,8 @@ that answers take a few seconds.
 The sidebar should show:
 
 ```
-Research extracts indexed: 731
-Orders in the sales database: 3000
+Research extracts   731
+Orders              3,000
 ```
 
 If it says 0 extracts, step 7 did not finish. If it warns about a missing API

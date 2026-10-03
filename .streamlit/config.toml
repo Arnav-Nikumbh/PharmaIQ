@@ -1,0 +1,26 @@
+# PharmaIQ ships with one light theme. Setting it here, rather than relying on
+# the viewer's system preference, keeps the look the same for everyone.
+
+[client]
+toolbarMode = "minimal"
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "light"
+primaryColor = "#0E7C7B"
+backgroundColor = "#F7F9FB"
+secondaryBackgroundColor = "#EDF2F6"
+textColor = "#1B2733"
+linkColor = "#0E7C7B"
+borderColor = "#DCE3EA"
+showWidgetBorder = true
+baseRadius = "medium"
+font = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+dataframeHeaderBackgroundColor = "#EDF2F6"
+showSidebarBorder = true
+
+[theme.sidebar]
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F3F6F9"
