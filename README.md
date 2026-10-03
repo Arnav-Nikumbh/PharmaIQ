@@ -3,6 +3,10 @@
 An assistant that answers questions using published medical research, an
 internal sales database, or both together.
 
+**Live demo: [pharmaiq-syns.onrender.com](https://pharmaiq-syns.onrender.com)**
+(free hosting, so the first visit after a quiet spell takes about a minute to
+wake up)
+
 A normal document assistant can tell you what the research says. A normal
 database assistant can tell you what sold. PharmaIQ connects the two: it reads
 the research first, pulls out the treatments and therapy areas it mentions,
@@ -45,9 +49,9 @@ ingest downloads a small embedding model, about 80MB, once.
 
 ### Deploying to Render
 
-`render.yaml` describes the service. In the Render dashboard choose
-**New > Blueprint**, pick this repository, and paste your Groq key when asked
-for `GROQ_API_KEY`. `render-build.sh` installs dependencies, builds the
+The live demo runs on Render. `render.yaml` describes the service. In the
+Render dashboard choose **New > Blueprint**, pick this repository, and paste
+your Groq key when asked for `GROQ_API_KEY`. `render-build.sh` installs dependencies, builds the
 database and ingests the three starter topics on every deploy, since `data/`
 and `chroma_db/` are not in the repository. Embeddings run through ONNX rather
 than PyTorch, which keeps the app inside the free plan's 512MB of memory.
